@@ -1,0 +1,53 @@
+main: mainsystem.App
+name: SMDMainsystem
+version: 0.1
+api-version: 1.13
+softdepend: [HolographicDisplays]
+depend: [Citizens, ProtocolLib, Vault, SMDDiscordBot]
+commands:
+  setdata: 
+    description: (for debug) set data of player
+  tpa: 
+    description: (請不要用輸入方式使用) 提出傳送請求
+  tpaccept: 
+    description: (請不要用輸入方式使用) 接受傳送請求
+  tpdeny: 
+    description: (請不要用輸入方式使用) 拒絕傳送請求
+  getflag:
+    description: (for debug) get an region banner
+  tpalist:
+    description: 查看未處理的傳送請求
+  chat:
+    description: (請不要用輸入方式使用) 和NPC對話
+  buyregion:
+    description: (請不要用輸入方式使用) 買領地
+  pay:
+    description: 給別人錢
+  party:
+    description: 組隊系統
+  region:
+    description: 請勿手動輸入本指令!
+  class: 
+    description: 請勿手動輸入本指令!
+  spawn:
+    description: 回重生點
+  shop: 
+    description: 請勿手動輸入本指令!
+  mainsystem:
+    description: (for debug) system command
+  connect:
+    description: 請勿手動輸入本指令!
+  setdisplayname:
+    description: 請勿手動輸入本指令!
+  quiet:
+    description: (請不要用輸入方式使用) 切換安靜模式
+  family:
+    description: 家族選單
+  chatchannel:
+    description: (請不要用輸入方式使用) 聊天頻道設定
+  setparticle:
+    description: (請不要用輸入方式使用) 粒子特效設定
+  forceconnect:
+    description: Console only.
+  m:
+    description: 跨分流密語

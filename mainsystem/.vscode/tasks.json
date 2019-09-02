@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "build",
+        "type": "shell",
+        "command": "mvn install -f \"c:\\Users\\vared\\Desktop\\mainsystem\\mainsystem\\pom.xml\" -PotherOutputDir",
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }]
+}
