@@ -5634,7 +5634,7 @@ public class App extends JavaPlugin implements Listener {
                             return;
                         }
 
-                        if (p.regions.split(",").length - 1 >= p.maxregions) {
+                        if (p.regionlist.size() >= p.maxregions) {
                             P.sendMessage(ChatColor.RED + "您的領地已經達到數量限制，刪除不必要的領地或至加值商城選購領地擴充卷。");
                             e.setCancelled(true);
                             return;

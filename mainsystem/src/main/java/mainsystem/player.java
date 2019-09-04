@@ -695,7 +695,7 @@ public class player {
                 Statement st2 = conn.createStatement();
                 String item = rs.getString("item");
                 int price = rs.getInt("price");
-                st2.execute("UPDATE `sendtoplayer` SET `receivetime`='" + util.now() + "', `receive`=1;");
+                st2.execute("UPDATE `sendtoplayer` SET `receivetime`='" + util.now() + "', `receive`=1 WHERE `player`='" + id + "' AND `item`='" + item + "';");
 
                 // 格式範例 [nickname]我不是服主
                 if (item.contains("[nickname]")) {
@@ -822,7 +822,7 @@ public class player {
             String datasource = "jdbc:mysql://localhost/mcserver?user=userdatauploader&password=Ken3228009!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
-            st.execute("UPDATE `userdata` SET `gold`=" + gold + ",`diamond`=" + diamond + ",`settings`='"
+            st.execute("UPDATE `userdata` SET `maxregions`=" + maxregions + ", `gold`=" + gold + ",`diamond`=" + diamond + ",`settings`='"
                     + getsettingsinGson() + "',`fly`=" + fly + ",`particle`='" + particle + "',`nickname`='" + nickname
                     + "',`coin`=" + coin + ",`home`='" + home + "', `uuid`='" + uuid + "', `family`='" + family
                     + "' ,`class`='" + cla + "',`lv`=" + lv + ",`exp`=" + exp + ",`balance`=" + util.round(balance, 0)
