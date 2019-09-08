@@ -63,6 +63,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -4028,7 +4029,7 @@ public class App extends JavaPlugin implements Listener {
                 }
             }
 
-            if(!wheat_cost) {
+            if (!wheat_cost) {
                 P.closeInventory();
                 P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "需要一組小麥");
                 return;
@@ -6063,6 +6064,31 @@ public class App extends JavaPlugin implements Listener {
     public void cantplacebed(BlockPlaceEvent e) {
         if (e.getBlock().getType().name().contains("BED") && e.getBlock().getWorld().getName().contains("_the_end")) {
             e.setCancelled(true);
+        }
+    }
+
+    // 活塞事件也要增加方塊紀錄，避免刷經驗
+    @EventHandler
+    public void recordonpiston(BlockPistonExtendEvent e) {
+        for(Block b : e.getBlocks()) {
+            new BukkitRunnable(){
+                @Override
+                public void run() {
+
+                    int x = 0;
+                    int y = 0;
+                    int z = 0;
+
+                    if(b.getLocation().getX() - e.getBlock().getX() < 0) x = -1;
+                    else if(b.getLocation().getX() - e.getBlock().getX() > 0) x = 1;
+                    if(b.getLocation().getY() - e.getBlock().getY() < 0) y = -1;
+                    else if(b.getLocation().getY() - e.getBlock().getY() > 0) y = 1;
+                    if(b.getLocation().getZ() - e.getBlock().getZ() < 0) z = -1;
+                    else if(b.getLocation().getZ() - e.getBlock().getZ() > 0) z = 1;
+                    
+                    b.getWorld().getBlockAt(b.getLocation().add(x,y,z)).setMetadata("placeby", new FixedMetadataValue(getPlugin(), "piston"));
+                }
+            }.runTaskLater(this, 1);
         }
     }
 
