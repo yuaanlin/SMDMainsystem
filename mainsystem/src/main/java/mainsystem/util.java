@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -44,6 +45,46 @@ public class util implements Listener {
             e.getInventory().setContents(newarray);
             P.updateInventory();
         }
+    }
+
+    // 判断 PVP 是否成立
+    public static boolean judgePVP(player da, player en) {
+
+        Player Da = Bukkit.getPlayer(da.id);
+
+        // 避免 entity 沒有 settings 導致 null 例外
+        if (en.settings == null) {
+            en.settings = new HashMap<>();
+        }
+
+        // 避免 damager 沒有 settings 導致 null 例外
+        if (da.settings == null) {
+            da.settings = new HashMap<>();
+        }
+
+        // 避免 damager 沒有 pvp 的設定導致 null 例外
+        if (!da.settings.containsKey("pvp")) {
+            da.settings.put("pvp", "false");
+        }
+
+        // 避免 entity 沒有 pvp 的設定導致 null 例外
+        if (!en.settings.containsKey("pvp")) {
+            da.settings.put("pvp", "false");
+        }
+
+        // damager 沒有開啟 pvp 模式
+        if (da.settings.get("pvp").equals("false")) {
+            util.sendActionbarMessage(Da, ChatColor.RED + "你沒開啟 PVP 模式 !");
+            return false;
+        }
+
+        // entity 沒有開啟 pvp 模式
+        if (en.settings.get("pvp").equals("false")) {
+            util.sendActionbarMessage(Da, ChatColor.RED + "他沒開啟 PVP 模式 !");
+            return false;
+        }
+
+        return true;
     }
 
     // 取得進度條

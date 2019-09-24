@@ -57,6 +57,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -69,9 +70,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -692,36 +695,8 @@ public class App extends JavaPlugin implements Listener {
                     return;
                 }
 
-                // 避免 entity 沒有 settings 導致 null 例外
-                if (en.settings == null) {
-                    en.settings = new HashMap<>();
-                }
-
-                // 避免 damager 沒有 settings 導致 null 例外
-                if (da.settings == null) {
-                    da.settings = new HashMap<>();
-                }
-
-                // 避免 damager 沒有 pvp 的設定導致 null 例外
-                if (!da.settings.containsKey("pvp")) {
-                    da.settings.put("pvp", "false");
-                }
-
-                // 避免 entity 沒有 pvp 的設定導致 null 例外
-                if (!en.settings.containsKey("pvp")) {
-                    da.settings.put("pvp", "false");
-                }
-
-                // damager 沒有開啟 pvp 模式
-                if (da.settings.get("pvp").equals("false")) {
+                if(!util.judgePVP(da,en)) {
                     e.setCancelled(true);
-                    util.sendActionbarMessage((Player) e.getDamager(), ChatColor.RED + "你沒開啟 PVP 模式 !");
-                }
-
-                // entity 沒有開啟 pvp 模式
-                if (en.settings.get("pvp").equals("false")) {
-                    e.setCancelled(true);
-                    util.sendActionbarMessage((Player) e.getDamager(), ChatColor.RED + "他沒開啟 PVP 模式 !");
                 }
             }
 
@@ -737,38 +712,8 @@ public class App extends JavaPlugin implements Listener {
                     player da = players.get(((Player) shooter).getName());
                     player en = players.get(((Player) e.getEntity()).getName());
 
-                    // 避免 entity 沒有 settings 導致 null 例外
-                    if (en.settings == null) {
-                        en.settings = new HashMap<>();
-                    }
-
-                    // 避免 damager 沒有 settings 導致 null 例外
-                    if (da.settings == null) {
-                        da.settings = new HashMap<>();
-                    }
-
-                    // 避免 damager 沒有 pvp 的設定導致 null 例外
-                    if (!da.settings.containsKey("pvp")) {
-                        da.settings.put("pvp", "false");
-                    }
-
-                    // 避免 entity 沒有 pvp 的設定導致 null 例外
-                    if (!en.settings.containsKey("pvp")) {
-                        da.settings.put("pvp", "false");
-                    }
-
-                    // damager 沒有開啟 pvp 模式
-                    if (da.settings.get("pvp").equals("false")) {
+                    if(!util.judgePVP(da,en)) {
                         e.setCancelled(true);
-                        ((Player) e.getEntity()).setFireTicks(-1);
-                        util.sendActionbarMessage((Player) shooter, ChatColor.RED + "你沒開啟 PVP 模式 !");
-                    }
-
-                    // entity 沒有開啟 pvp 模式
-                    if (en.settings.get("pvp").equals("false")) {
-                        e.setCancelled(true);
-                        ((Player) e.getEntity()).setFireTicks(-1);
-                        util.sendActionbarMessage((Player) shooter, ChatColor.RED + "他沒開啟 PVP 模式 !");
                     }
 
                 }
@@ -6090,6 +6035,78 @@ public class App extends JavaPlugin implements Listener {
                 }
             }.runTaskLater(this, 1);
         }
+    }
+
+    // 防止物品框被破壞
+    @EventHandler
+    public void itemframebreakevent(HangingBreakByEntityEvent e) {
+
+        if(e.isCancelled()) return;
+
+        if(e.getEntity() instanceof ItemFrame && e.getRemover() instanceof Player) {
+
+            Player P = (Player) e.getRemover();
+            player p = players.get(P.getName());
+
+            if(p.inregion == -1) return;
+
+            region r = regions.get(p.inregion);
+
+            if( !r.hasPermission(p, "break")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法破壞方塊");
+                e.setCancelled(true);
+            }
+
+        }
+
+    }
+
+    // 防止物品框內的物品被取出
+    @EventHandler
+    public void itemframebreakevent(EntityDamageByEntityEvent e) {
+
+        if(e.isCancelled()) return;
+
+        if(e.getEntity() instanceof ItemFrame && e.getDamager() instanceof Player) {
+
+            Player P = (Player) e.getDamager();
+            player p = players.get(P.getName());
+
+            if(p.inregion == -1) return;
+
+            region r = regions.get(p.inregion);
+
+            if( !r.hasPermission(p, "chest")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法使用容器類方塊");
+                e.setCancelled(true);
+            }
+
+        }
+
+    }
+
+    // 防止物品框被破壞
+    @EventHandler
+    public void itemframetakeevent(PlayerInteractEntityEvent e) {
+
+        if(e.isCancelled()) return;
+
+        if(e.getRightClicked() instanceof ItemFrame) {
+
+            Player P = e.getPlayer();
+            player p = players.get(P.getName());
+
+            if(p.inregion == -1) return;
+
+            region r = regions.get(p.inregion);
+
+            if( !r.hasPermission(p, "chest")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法使用容器類方塊");
+                e.setCancelled(true);
+            }
+
+        }
+
     }
 
     // 方塊放置事件
