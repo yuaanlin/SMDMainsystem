@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.BlockFace;
@@ -85,38 +86,31 @@ public class bow implements Listener {
             Arrow arrow = (Arrow) e.getEntity();
             // 判斷是 MetaData 的 ShootBy 是否有值
             if (!arrow.getMetadata("ShootBy").isEmpty()) {
+
                 float power = arrow.getMetadata("Explosion").get(0).asFloat() * 1.5f;
-                // 判斷打到玩家還是敵人
-                if (e.getHitBlock() == null) {
-                    if (e.getHitEntity() instanceof LivingEntity) {
-                        LivingEntity liveEntity = (LivingEntity) e.getHitEntity();
 
-                        if (liveEntity instanceof Player) {
+                Location loc = arrow.getLocation();
 
-                            if (liveEntity.hasMetadata("NPC")) {
-                                return;
-                            }
-
-                            player en = App.players.get(liveEntity.getName());
-                            player da = App.players.get(arrow.getMetadata("ShootBy").get(0).asString());
-
-                            if (util.judgePVP(da, en) && !(plugin.getConfig().getInt("server") == 0
-                                    && e.getEntity().getLocation().getWorld().getName().equals("world"))) {
-                                liveEntity.damage(power * 2);
-                            } else {
-                                power = 0;
-                            }
-
-                        }
+                Boolean explode = true;
+                player da = App.players.get(arrow.getMetadata("ShootBy").get(0).asString());
+                for (Player P : util.getPlayerNear(loc, 8)) {
+                    player en = App.players.get(P.getName());
+                    if (!util.judgePVP(da, en)) {
+                        explode = false;
                     }
                 }
-                Location loc = arrow.getLocation();
-                BlockFace face = arrow.getFacing();
-                double x = loc.getX(), y = loc.getY(), z = loc.getZ();
-                arrow.getWorld().createExplosion(x + face.getModX(), y + 1, z - face.getModZ(), power, false, false);
-                arrow.getWorld().spawnParticle(Particle.FLAME, loc, 300, 1.0, 1.0, 1.0, (power / 15), null, true);
-                arrow.getWorld().spawnParticle(Particle.SMOKE_LARGE, loc, 150, 1.0, 1.0, 1.0, (power / 15), null, true);
-                arrow.getWorld().spawnParticle(Particle.LAVA, loc, 50, 1.5, 1.0, 1.5, (power / 15), null, true);
+
+                if (explode) {
+                    BlockFace face = arrow.getFacing();
+                    double x = loc.getX(), y = loc.getY(), z = loc.getZ();
+                    arrow.getWorld().createExplosion(x + face.getModX(), y + 1, z - face.getModZ(), power, false,
+                            false);
+                    arrow.getWorld().spawnParticle(Particle.FLAME, loc, 300, 1.0, 1.0, 1.0, (power / 15), null, true);
+                    arrow.getWorld().spawnParticle(Particle.SMOKE_LARGE, loc, 150, 1.0, 1.0, 1.0, (power / 15), null,
+                            true);
+                    arrow.getWorld().spawnParticle(Particle.LAVA, loc, 50, 1.5, 1.0, 1.5, (power / 15), null, true);
+                }
+
                 arrowList.remove(arrow);
                 arrow.remove();
             }

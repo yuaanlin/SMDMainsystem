@@ -6,12 +6,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -223,6 +225,20 @@ public class util implements Listener {
                 Bukkit.getServer().shutdown();
             }
         }.runTaskLater(App.getPlugin(), 540);
+    }
+
+    /** 取得距離某地點特定範圍內的玩家 */
+    public static List<Player> getPlayerNear(Location l, int radius) {
+        List<Player> nearPlayers = new ArrayList<>();
+        for(Player P : Bukkit.getOnlinePlayers()) {
+            Location lP = P.getLocation();
+            if(lP.getWorld().equals(l.getWorld())){
+                if(l.distance(lP) <= radius) {
+                    nearPlayers.add(P);
+                }
+            }
+        }
+        return nearPlayers;
     }
 
     /** 取得玩家最後登入時間 */

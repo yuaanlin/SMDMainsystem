@@ -705,9 +705,7 @@ public class App extends JavaPlugin implements Listener {
                 Arrow arrow = (Arrow) e.getDamager();
                 ProjectileSource shooter = arrow.getShooter();
 
-                if (shooter instanceof Player && e.getEntity() instanceof Player) // checking if the shooter is a
-                                                                                  // player.
-                {
+                if (shooter instanceof Player && e.getEntity() instanceof Player) {
 
                     player da = players.get(((Player) shooter).getName());
                     player en = players.get(((Player) e.getEntity()).getName());
