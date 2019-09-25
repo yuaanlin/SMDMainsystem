@@ -123,7 +123,7 @@ public class bow implements Listener {
             // 發送記錄到 Discord 監控頻道
             EmbedBuilder MEbuilder = new EmbedBuilder();
             MEbuilder.setColor(Color.RED);
-            MEbuilder.setTitle("分流 " + plugin.getConfig().getInt("server") + " 發生錯誤");
+            MEbuilder.setTitle("分流 " + App.servername + " 發生錯誤");
             MEbuilder.appendDescription(errors.toString());
             App.systembot.sendtoSystemChannel(MEbuilder.build());
 

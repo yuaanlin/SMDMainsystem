@@ -178,7 +178,7 @@ public class App extends JavaPlugin implements Listener {
     public static PluginMessageHandler PMH = new PluginMessageHandler();
 
     // 儲存該系統運行於哪個分流伺服器 (中文名稱)
-    static String servername = "";
+    public static String servername = "";
 
     // 載入設定檔
     static FileConfiguration config;
@@ -695,7 +695,7 @@ public class App extends JavaPlugin implements Listener {
                     return;
                 }
 
-                if(!util.judgePVP(da,en)) {
+                if (!util.judgePVP(da, en)) {
                     e.setCancelled(true);
                 }
             }
@@ -710,7 +710,7 @@ public class App extends JavaPlugin implements Listener {
                     player da = players.get(((Player) shooter).getName());
                     player en = players.get(((Player) e.getEntity()).getName());
 
-                    if(!util.judgePVP(da,en)) {
+                    if (!util.judgePVP(da, en)) {
                         e.setCancelled(true);
                     }
 
@@ -2304,6 +2304,11 @@ public class App extends JavaPlugin implements Listener {
                             amount = Float.parseFloat(args[2]);
                         } catch (NumberFormatException e) {
                             P.sendMessage(ChatColor.RED + "你必須輸入一個數字!");
+                            return false;
+                        }
+
+                        if (amount <= 0) {
+                            P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "請輸入正整數!");
                             return false;
                         }
 
@@ -3920,70 +3925,87 @@ public class App extends JavaPlugin implements Listener {
     @EventHandler
     public void familyshop(InventoryClickEvent e) {
 
-        Player P = (Player) e.getWhoClicked();
-        player p = players.get(P.getName());
+        try {
 
-        if (e.getView().getTitle().contains("可用家族道具")) {
-            e.setCancelled(true);
-        } else
-            return;
+            Player P = (Player) e.getWhoClicked();
+            player p = players.get(P.getName());
 
-        if (e.getRawSlot() < 0 || e.getRawSlot() > 10)
-            return;
-
-        if (e.getClickedInventory().getItem(e.getRawSlot()) == null)
-            return;
-
-        ItemStack item = e.getClickedInventory().getItem(e.getRawSlot());
-
-        if (item.getItemMeta().getDisplayName().contains("家族創立卷")) {
-
-            if (P.getInventory().firstEmpty() == -1) {
-                P.closeInventory();
-                P.sendMessage(ChatColor.RED + "包包空間不足");
+            if (e.getView().getTitle().contains("可用家族道具")) {
+                e.setCancelled(true);
+            } else
                 return;
-            }
 
-            ItemStack stack = new ItemStack(Material.PAPER, 1);
-            ItemMeta im = stack.getItemMeta();
-            im.setDisplayName(ChatColor.DARK_PURPLE + "家族創立卷");
-            im.setLore(Arrays.asList("", ChatColor.WHITE + "持本卷點擊右鍵即可創立家族，",
-                    ChatColor.WHITE + "使用本卷的玩家將成為家族長，且該玩家必須是當前隊伍的隊長",
-                    ChatColor.WHITE + "在該玩家的隊伍中的其他成員將成為家族成員，且人數必須為10人。"));
-            stack.setItemMeta(im);
-            P.getInventory().addItem(new ItemStack(stack));
-
-        } else if (item.getItemMeta().getDisplayName().contains("家族邀請函")) {
-
-            if (P.getInventory().firstEmpty() == -1) {
-                P.closeInventory();
-                P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "包包空間不足");
+            if (e.getRawSlot() < 0 || e.getRawSlot() > 10)
                 return;
-            }
 
-            boolean wheat_cost = false;
-            for (int i = 0; i <= 35; i++) {
-                ItemStack temp = P.getInventory().getItem(i);
-                if (temp.getType().equals(Material.WHEAT) && temp.getAmount() == 64) {
-                    P.getInventory().getItem(i).setAmount(0);
-                    P.updateInventory();
-                    wheat_cost = true;
-                    break;
+            if (e.getClickedInventory().getItem(e.getRawSlot()) == null)
+                return;
+
+            ItemStack item = e.getClickedInventory().getItem(e.getRawSlot());
+
+            if (item.getItemMeta().getDisplayName().contains("家族創立卷")) {
+
+                if (P.getInventory().firstEmpty() == -1) {
+                    P.closeInventory();
+                    P.sendMessage(ChatColor.RED + "包包空間不足");
+                    return;
                 }
+
+                ItemStack stack = new ItemStack(Material.PAPER, 1);
+                ItemMeta im = stack.getItemMeta();
+                im.setDisplayName(ChatColor.DARK_PURPLE + "家族創立卷");
+                im.setLore(Arrays.asList("", ChatColor.WHITE + "持本卷點擊右鍵即可創立家族，",
+                        ChatColor.WHITE + "使用本卷的玩家將成為家族長，且該玩家必須是當前隊伍的隊長",
+                        ChatColor.WHITE + "在該玩家的隊伍中的其他成員將成為家族成員，且人數必須為10人。"));
+                stack.setItemMeta(im);
+                P.getInventory().addItem(new ItemStack(stack));
+
+            } else if (item.getItemMeta().getDisplayName().contains("家族邀請函")) {
+
+                if (P.getInventory().firstEmpty() == -1) {
+                    P.closeInventory();
+                    P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "包包空間不足");
+                    return;
+                }
+
+                boolean wheat_cost = false;
+                for (int i = 0; i <= 35; i++) {
+                    ItemStack temp = P.getInventory().getItem(i);
+                    if (temp != null && temp.getType().equals(Material.WHEAT) && temp.getAmount() == 64) {
+                        P.getInventory().getItem(i).setAmount(0);
+                        P.updateInventory();
+                        wheat_cost = true;
+                        break;
+                    }
+                }
+
+                if (!wheat_cost) {
+                    P.closeInventory();
+                    P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "需要一組小麥");
+                    return;
+                }
+
+                ItemStack stack = new ItemStack(Material.PAPER, 1);
+                ItemMeta im = stack.getItemMeta();
+                im.setDisplayName(ChatColor.DARK_PURPLE + "家族邀請函 : " + p.family);
+                im.setLore(Arrays.asList("", ChatColor.WHITE + "持本卷點擊右鍵加入家族 " + p.family,
+                        ChatColor.WHITE + "(無法在傳送小鎮使用)"));
+                stack.setItemMeta(im);
+                P.getInventory().addItem(new ItemStack(stack));
+
             }
 
-            if (!wheat_cost) {
-                P.closeInventory();
-                P.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "需要一組小麥");
-                return;
-            }
+        } catch (Exception exc) {
 
-            ItemStack stack = new ItemStack(Material.PAPER, 1);
-            ItemMeta im = stack.getItemMeta();
-            im.setDisplayName(ChatColor.DARK_PURPLE + "家族邀請函 : " + p.family);
-            im.setLore(Arrays.asList("", ChatColor.WHITE + "持本卷點擊右鍵加入家族 " + p.family, ChatColor.WHITE + "(無法在傳送小鎮使用)"));
-            stack.setItemMeta(im);
-            P.getInventory().addItem(new ItemStack(stack));
+            StringWriter errors = new StringWriter();
+            exc.printStackTrace(new PrintWriter(errors));
+
+            // 發送記錄到 Discord 監控頻道
+            EmbedBuilder MEbuilder = new EmbedBuilder();
+            MEbuilder.setColor(java.awt.Color.RED);
+            MEbuilder.setTitle("分流 " + servername + " 發生錯誤");
+            MEbuilder.appendDescription(errors.toString());
+            App.systembot.sendtoSystemChannel(MEbuilder.build());
 
         }
     }
@@ -6013,8 +6035,8 @@ public class App extends JavaPlugin implements Listener {
     // 活塞事件也要增加方塊紀錄，避免刷經驗
     @EventHandler
     public void recordonpiston(BlockPistonExtendEvent e) {
-        for(Block b : e.getBlocks()) {
-            new BukkitRunnable(){
+        for (Block b : e.getBlocks()) {
+            new BukkitRunnable() {
                 @Override
                 public void run() {
 
@@ -6022,14 +6044,21 @@ public class App extends JavaPlugin implements Listener {
                     int y = 0;
                     int z = 0;
 
-                    if(b.getLocation().getX() - e.getBlock().getX() < 0) x = -1;
-                    else if(b.getLocation().getX() - e.getBlock().getX() > 0) x = 1;
-                    if(b.getLocation().getY() - e.getBlock().getY() < 0) y = -1;
-                    else if(b.getLocation().getY() - e.getBlock().getY() > 0) y = 1;
-                    if(b.getLocation().getZ() - e.getBlock().getZ() < 0) z = -1;
-                    else if(b.getLocation().getZ() - e.getBlock().getZ() > 0) z = 1;
-                    
-                    b.getWorld().getBlockAt(b.getLocation().add(x,y,z)).setMetadata("placeby", new FixedMetadataValue(getPlugin(), "piston"));
+                    if (b.getLocation().getX() - e.getBlock().getX() < 0)
+                        x = -1;
+                    else if (b.getLocation().getX() - e.getBlock().getX() > 0)
+                        x = 1;
+                    if (b.getLocation().getY() - e.getBlock().getY() < 0)
+                        y = -1;
+                    else if (b.getLocation().getY() - e.getBlock().getY() > 0)
+                        y = 1;
+                    if (b.getLocation().getZ() - e.getBlock().getZ() < 0)
+                        z = -1;
+                    else if (b.getLocation().getZ() - e.getBlock().getZ() > 0)
+                        z = 1;
+
+                    b.getWorld().getBlockAt(b.getLocation().add(x, y, z)).setMetadata("placeby",
+                            new FixedMetadataValue(getPlugin(), "piston"));
                 }
             }.runTaskLater(this, 1);
         }
@@ -6039,19 +6068,21 @@ public class App extends JavaPlugin implements Listener {
     @EventHandler
     public void itemframebreakevent(HangingBreakByEntityEvent e) {
 
-        if(e.isCancelled()) return;
+        if (e.isCancelled())
+            return;
 
-        if(e.getEntity() instanceof ItemFrame && e.getRemover() instanceof Player) {
+        if (e.getEntity() instanceof ItemFrame && e.getRemover() instanceof Player) {
 
             Player P = (Player) e.getRemover();
             player p = players.get(P.getName());
 
-            if(p.inregion == -1) return;
+            if (p.inregion == -1)
+                return;
 
             region r = regions.get(p.inregion);
 
-            if( !r.hasPermission(p, "break")) {
-                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法破壞方塊");
+            if (!r.hasPermission(p, "break")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD + "你在這個領地的身分組無法破壞方塊");
                 e.setCancelled(true);
             }
 
@@ -6063,19 +6094,21 @@ public class App extends JavaPlugin implements Listener {
     @EventHandler
     public void itemframebreakevent(EntityDamageByEntityEvent e) {
 
-        if(e.isCancelled()) return;
+        if (e.isCancelled())
+            return;
 
-        if(e.getEntity() instanceof ItemFrame && e.getDamager() instanceof Player) {
+        if (e.getEntity() instanceof ItemFrame && e.getDamager() instanceof Player) {
 
             Player P = (Player) e.getDamager();
             player p = players.get(P.getName());
 
-            if(p.inregion == -1) return;
+            if (p.inregion == -1)
+                return;
 
             region r = regions.get(p.inregion);
 
-            if( !r.hasPermission(p, "chest")) {
-                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法使用容器類方塊");
+            if (!r.hasPermission(p, "chest")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD + "你在這個領地的身分組無法使用容器類方塊");
                 e.setCancelled(true);
             }
 
@@ -6087,19 +6120,21 @@ public class App extends JavaPlugin implements Listener {
     @EventHandler
     public void itemframetakeevent(PlayerInteractEntityEvent e) {
 
-        if(e.isCancelled()) return;
+        if (e.isCancelled())
+            return;
 
-        if(e.getRightClicked() instanceof ItemFrame) {
+        if (e.getRightClicked() instanceof ItemFrame) {
 
             Player P = e.getPlayer();
             player p = players.get(P.getName());
 
-            if(p.inregion == -1) return;
+            if (p.inregion == -1)
+                return;
 
             region r = regions.get(p.inregion);
 
-            if( !r.hasPermission(p, "chest")) {
-                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD +  "你在這個領地的身分組無法使用容器類方塊");
+            if (!r.hasPermission(p, "chest")) {
+                util.sendActionbarMessage(P, ChatColor.RED + "" + ChatColor.BOLD + "你在這個領地的身分組無法使用容器類方塊");
                 e.setCancelled(true);
             }
 
