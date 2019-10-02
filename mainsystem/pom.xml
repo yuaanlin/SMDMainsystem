@@ -16,7 +16,7 @@
     <profile>
       <id>otherOutputDir</id>
       <build>
-        <directory>C:\Users\Yuanlin\Desktop\maven-output</directory>
+        <directory>/home/yuanlin/Desktop/maven-output</directory>
       </build>
     </profile>
   </profiles>
@@ -56,7 +56,7 @@
       <artifactId>smd.discordbot</artifactId>
       <version>0.1</version>
       <scope>system</scope>
-      <systemPath>C:\Users\Yuanlin\Desktop\git-SMDMainsystem\mainsystem\ref\smd.discordbot-0.1.jar</systemPath>
+      <systemPath>/home/yuanlin/Desktop/smdmainsystem/mainsystem/ref/smd.discordbot-0.1.jar</systemPath>
     </dependency>
     <dependency>
         <groupId>com.comphenix.protocol</groupId>
