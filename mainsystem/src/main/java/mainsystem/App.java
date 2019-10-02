@@ -334,7 +334,7 @@ public class App extends JavaPlugin implements Listener {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=serverdatamanager&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st3 = conn.createStatement();
             st3.execute("SELECT * FROM serverdatas");
@@ -506,7 +506,7 @@ public class App extends JavaPlugin implements Listener {
                     ResultSet rs = null;
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
-                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                         conn = DriverManager.getConnection(datasource);
                         Statement st = conn.createStatement();
                         st.execute("SELECT * FROM lotterylog WHERE `time`='" + util.now().substring(0, 13) + "';");
@@ -581,7 +581,7 @@ public class App extends JavaPlugin implements Listener {
                 ResultSet rs = null;
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
-                    String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+                    String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                     conn = DriverManager.getConnection(datasource);
                     Statement st = conn.createStatement();
                     st.execute("SELECT * FROM AutoCoPurgeLogs WHERE `date`='" + util.now().substring(0, 10)
@@ -803,7 +803,7 @@ public class App extends JavaPlugin implements Listener {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=serverdatamanager&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             for (Map.Entry<String, String> entry : serverdatas.entrySet()) {
@@ -2330,7 +2330,7 @@ public class App extends JavaPlugin implements Listener {
                     Connection conn = null;
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
-                        String datasource = "jdbc:mysql://localhost/mcserver?user=userdatauploader&password=Ken3228009!&useSSL=false";
+                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                         conn = DriverManager.getConnection(datasource);
                         Statement st = conn.createStatement();
                         st.execute("UPDATE `userdata` SET `baha`=1 WHERE `id`='" + senderp.getName() + "'");
@@ -2564,7 +2564,7 @@ public class App extends JavaPlugin implements Listener {
 
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
-                        String datasource = "jdbc:mysql://localhost/mcserver?user=shopuploader&password=Ken3228009!&useSSL=false";
+                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                         conn = DriverManager.getConnection(datasource);
                         Statement st = conn.createStatement();
                         st.execute("SELECT * FROM `shop_sell` ORDER BY `id` DESC LIMIT 1");
@@ -2698,7 +2698,7 @@ public class App extends JavaPlugin implements Listener {
                             try {
                                 Connection conn = null;
                                 Class.forName("com.mysql.jdbc.Driver");
-                                String datasource = "jdbc:mysql://localhost/mcserver?user=shopuploader&password=Ken3228009!&useSSL=false";
+                                String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                                 conn = DriverManager.getConnection(datasource);
                                 Statement st2 = conn.createStatement();
                                 st2.execute("DELETE FROM `shop_sell` WHERE `id`=" + item.id);
@@ -4911,7 +4911,7 @@ public class App extends JavaPlugin implements Listener {
                     try {
                         Connection conn = null;
                         Class.forName("com.mysql.jdbc.Driver");
-                        String datasource = "jdbc:mysql://localhost/mcserver?user=shopuploader&password=Ken3228009!&useSSL=false";
+                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                         conn = DriverManager.getConnection(datasource);
                         Statement st2 = conn.createStatement();
                         st2.execute("DELETE FROM `shop_sell` WHERE `id`=" + id);
@@ -5250,7 +5250,7 @@ public class App extends JavaPlugin implements Listener {
             int id = 0;
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+                String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                 conn = DriverManager.getConnection(datasource);
                 Statement st = conn.createStatement();
                 st.execute("SELECT * FROM `mission` ORDER BY `id` DESC LIMIT 1;");
@@ -5558,7 +5558,7 @@ public class App extends JavaPlugin implements Listener {
                     try {
                         int id = -1;
                         Class.forName("com.mysql.jdbc.Driver");
-                        String datasource = "jdbc:mysql://localhost/mcserver?user=regiondownloader&password=Ken3228009!&useSSL=false";
+                        String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                         conn = DriverManager.getConnection(datasource);
                         Statement st = conn.createStatement();
                         st.execute("SELECT * FROM `regions` ORDER BY `id` DESC LIMIT 1");
@@ -5813,7 +5813,7 @@ public class App extends JavaPlugin implements Listener {
                         Connection conn = null;
                         try {
                             Class.forName("com.mysql.jdbc.Driver");
-                            String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+                            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                             conn = DriverManager.getConnection(datasource);
                             Statement st = conn.createStatement();
                             st.execute("DELETE FROM `regions` WHERE `id`=" + r.id);

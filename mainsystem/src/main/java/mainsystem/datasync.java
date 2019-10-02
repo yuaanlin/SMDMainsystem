@@ -29,7 +29,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=shopuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             shop_sell_item item = App.shop_sell.get(id);
@@ -51,7 +51,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=shopdownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM `shop_sell` WHERE `id`=" + id + ";");
@@ -80,7 +80,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=shopuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             int i = 0;
@@ -107,7 +107,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=shopdownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM `shop_sell` ORDER BY `id` DESC;");
@@ -145,7 +145,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             region r = App.regions.get(id);
@@ -169,7 +169,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regiondownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM regions WHERE `id`=" + id);
@@ -218,7 +218,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             int i = 0;
@@ -267,7 +267,7 @@ public class datasync {
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regiondownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[資料庫] 準備自資料庫下載所有領地資料 ...");
             Statement st = conn.createStatement();
@@ -395,7 +395,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatauploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             int all = Bukkit.getOnlinePlayers().size();
@@ -481,7 +481,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=familydatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM families WHERE `name`='" + name + "'");
@@ -520,7 +520,7 @@ public class datasync {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=familydatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[資料庫] 準備自資料庫下載所有家族資料至分流伺服器 ...");
             Statement st = conn.createStatement();

@@ -44,7 +44,7 @@ public class lottery {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("INSERT INTO lotterypool (`player`,`amount`,`time`) VALUES ('" + P.getName() + "'," + amount
@@ -102,7 +102,7 @@ public class lottery {
         // 整理每個玩家買的張數
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT player, SUM(amount) FROM lotterypool GROUP BY player;");
@@ -177,7 +177,7 @@ public class lottery {
         // 發送獎勵
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=bankmanager&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute(
@@ -201,7 +201,7 @@ public class lottery {
         // 刪除獎池
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("DELETE FROM `lotterypool` WHERE 1;");
@@ -233,7 +233,7 @@ public class lottery {
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT SUM(amount) FROM lotterypool;");
@@ -269,7 +269,7 @@ public class lottery {
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT SUM(amount) FROM lotterypool WHERE `player`='" + P.getName() + "';");
@@ -305,7 +305,7 @@ public class lottery {
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT SUM(amount) FROM lotterypool WHERE `player`='" + P.getName() + "';");

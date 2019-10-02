@@ -126,7 +126,7 @@ public class main implements Listener {
                 Connection conn = null;
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
-                    String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+                    String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                     conn = DriverManager.getConnection(datasource);
                     Statement st = conn.createStatement();
                     st.execute("UPDATE `mission` SET `endtime`='" + util.now() + "' WHERE id=" + mg.id + ";");
@@ -207,7 +207,7 @@ public class main implements Listener {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM `mission` WHERE `endtime`='進行中'");

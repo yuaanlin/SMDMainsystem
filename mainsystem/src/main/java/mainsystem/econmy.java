@@ -67,7 +67,7 @@ class economy extends AbstractEconomy {
             Connection conn = null;
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                String datasource = "jdbc:mysql://localhost/mcserver?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+                String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                 conn = DriverManager.getConnection(datasource);
                 Statement st = conn.createStatement();
                 ResultSet rs = st.getResultSet();

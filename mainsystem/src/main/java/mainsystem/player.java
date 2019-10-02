@@ -118,7 +118,7 @@ public class player {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM userdata where `id`='" + id + "'");
@@ -568,7 +568,7 @@ public class player {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM userdata where `id`='" + id + "'");
@@ -590,7 +590,7 @@ public class player {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatauploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("UPDATE `userdata` SET `lastlogindate`='" + util.now() + "' WHERE `id`='" + id + "'");
@@ -608,7 +608,7 @@ public class player {
         Player P = Bukkit.getPlayer(id);
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             ResultSet rs = st.getResultSet();
@@ -645,7 +645,7 @@ public class player {
         Player P = Bukkit.getPlayer(id);
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/donate?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/donate?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             ResultSet rs = st.getResultSet();
@@ -682,7 +682,7 @@ public class player {
         Player P = Bukkit.getPlayer(id);
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/donate?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/donate?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             ResultSet rs = st.getResultSet();
@@ -819,7 +819,7 @@ public class player {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=userdatauploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("UPDATE `userdata` SET `maxregions`=" + maxregions + ", `gold`=" + gold + ",`diamond`=" + diamond + ",`settings`='"
@@ -844,10 +844,10 @@ public class player {
         try {
             Connection conn = null;
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=bankmanager&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
-            st.execute("INSERT INTO `BalanceLogs` ( `id`, `uuid`,`amount`,`description`,`balance`,`time`) VALUES ('"
+            st.execute("INSERT INTO `balancelogs` ( `id`, `uuid`,`amount`,`description`,`balance`,`time`) VALUES ('"
                     + id + "','" + uuid + "'," + amt + ",'" + description + "'," + balance + ",'" + util.now() + "');");
             conn.close();
         } catch (Exception exc) {
@@ -866,10 +866,10 @@ public class player {
             try {
                 Connection conn = null;
                 Class.forName("com.mysql.jdbc.Driver");
-                String datasource = "jdbc:mysql://localhost/mcserver?user=bankmanager&password=Ken3228009!&useSSL=false";
+                String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                 conn = DriverManager.getConnection(datasource);
                 Statement st = conn.createStatement();
-                st.execute("INSERT INTO `BalanceLogs` ( `id`, `uuid`,`amount`,`description`,`balance`,`time`) VALUES ('"
+                st.execute("INSERT INTO `balancelogs` ( `id`, `uuid`,`amount`,`description`,`balance`,`time`) VALUES ('"
                         + id + "','" + uuid + "'," + -amt + ",'" + description + "'," + balance + ",'" + util.now()
                         + "');");
                 conn.close();

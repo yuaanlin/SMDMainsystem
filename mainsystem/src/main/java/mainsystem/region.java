@@ -74,7 +74,7 @@ public class region {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regiondownloader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("SELECT * FROM regions where `id`='" + id + "'");
@@ -180,7 +180,7 @@ public class region {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=regionuploader&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute("UPDATE `regions` SET `tp_x`=" + tpx + ", `tp_y`=" + tpy + ",`tp_z`=" + tpz + ", `name`='" + name

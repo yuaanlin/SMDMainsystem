@@ -256,7 +256,7 @@ public class util implements Listener {
             Connection conn = null;
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                String datasource = "jdbc:mysql://localhost/mcserver?user=userdatadownloader&password=Ken3228009!&useSSL=false";
+                String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
                 conn = DriverManager.getConnection(datasource);
                 Statement st = conn.createStatement();
                 st.execute("SELECT * FROM userdata where `id`='" + id + "'");
@@ -326,7 +326,7 @@ public class util implements Listener {
         try {
             Connection conn = null;
             Class.forName("com.mysql.jdbc.Driver");
-            String datasource = "jdbc:mysql://localhost/mcserver?user=bankmanager&password=Ken3228009!&useSSL=false";
+            String datasource = "jdbc:mysql://localhost/mcserver?user=root&password=Yuanlin1207!&useSSL=false";
             conn = DriverManager.getConnection(datasource);
             Statement st = conn.createStatement();
             st.execute(
