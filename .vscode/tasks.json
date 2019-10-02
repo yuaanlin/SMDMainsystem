@@ -3,7 +3,7 @@
     "tasks": [{
         "label": "build",
         "type": "shell",
-        "command": "mvn install -f \"C:\\Users\\Yuanlin\\Desktop\\git-SMDMainsystem\\mainsystem\\pom.xml\" -PotherOutputDir",
+        "command": "mvn install -f \"/home/yuanlin/Desktop/smdmainsystem/mainsystem/pom.xml\" -PotherOutputDir",
         "group": {
             "kind": "build",
             "isDefault": true
