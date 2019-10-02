@@ -326,7 +326,7 @@ public class magic implements Listener {
 
         AnvilInventory inv = (AnvilInventory) e.getInventory();
 
-        if (e.getSlot() == 0 && P.getItemOnCursor().getItemMeta().hasLore() && inv.getItem(1) != null
+        if (e.getSlot() == 0 && P.getItemOnCursor() != null & P.getItemOnCursor().hasItemMeta() && P.getItemOnCursor().getItemMeta().hasLore() && inv.getItem(1) != null
                 && inv.getItem(1).getType().equals(Material.ENCHANTED_BOOK)) {
             EnchantmentStorageMeta esm = (EnchantmentStorageMeta) inv.getItem(1).getItemMeta();
             Map<Enchantment, Integer> enchants = esm.getEnchants();
