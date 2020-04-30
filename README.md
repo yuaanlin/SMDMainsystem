@@ -1,4 +1,6 @@
-# SMDMainsystem
+> :warning: **No longer update**: The minecraft server has closed due to my college study, and this repo is no longer update.
+
+# SMD Mainsystem
 
 This Java project is an Spigot plugin project, which installed in Taiwan Minecraft Server "SMD:Kingdoms".  
 This plugin contains several functions, and is used as a Core System in SMD:Kingdoms.  
@@ -11,10 +13,3 @@ And there is open-source for everyone around world, welcome to give me some advi
 
 For more information, please check our publicity article in Bahamut.com :  
 <https://forum.gamer.com.tw/Co.php?bsn=18673&sn=908820>  
-
-## About developer
-
-Yuan-Lin, Lin.  
-Minecraft Server Owner, Spigot plugin develper.  
-Studying in Zhejian University, major in Computer Science and Technology.  
-Contact me with Email varedx@gmail.com or Discord Yuanlin#7934 .  
